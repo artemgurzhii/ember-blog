@@ -1,0 +1,7 @@
+<div class="col-md-6">
+  {{post-form model=model title='Create post' savePost=(action 'savePost')}}
+</div>
+
+<div class="col-md-6">
+  {{markdown-to-html markdown=model.body}}
+</div>
