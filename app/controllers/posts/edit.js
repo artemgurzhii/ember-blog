@@ -1,11 +1,15 @@
 import Ember from 'ember';
+import PostMixin from '../../mixins/post';
 
-export default Ember.Controller.extend({
+const { set } = Ember;
+
+export default Ember.Controller.extend(PostMixin, {
+  title: 'Update post',
+
   actions: {
-    updatePost(updatedPost) {
-      updatedPost.save().then(() => {
-        this.transitionToRoute('posts.show', updatedPost.id);
-      });
+    updatePost(post) {
+      set(post, 'updated_at', new Date());
+      post.save().then(this._afterSave.bind(this));
     }
   }
 });

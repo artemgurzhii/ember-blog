@@ -8,14 +8,6 @@ export default Ember.Controller.extend({
 
   isLoggedIn: Ember.computed.equal('session.isAuthenticated', true),
 
-  init() {
-    this._super(...arguments);
-
-    if (get(this, 'isLoggedIn')) {
-      this.transitionToRoute('index');
-    }
-  },
-
   actions: {
     login() {
       const { email, password } = getProperties(this, 'email', 'password');
@@ -28,6 +20,14 @@ export default Ember.Controller.extend({
         })
         .then(this._success.bind(this))
         .catch(this._error.bind(this));
+    }
+  },
+
+  init() {
+    this._super(...arguments);
+
+    if (get(this, 'isLoggedIn')) {
+      this.transitionToRoute('index');
     }
   },
 

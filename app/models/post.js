@@ -1,8 +1,6 @@
 import DS from 'ember-data';
 import Ember from 'ember';
 
-const { get } = Ember;
-
 export default DS.Model.extend({
   title: DS.attr('string'),
   body: DS.attr('string'),
@@ -11,13 +9,14 @@ export default DS.Model.extend({
       return new Date();
     }
   }),
-  edited_at: DS.attr('date', {
+  updated_at: DS.attr('date', {
     defaultValue: null
   }),
-  
-  wasEdited: Ember.computed.gt('edited_at', 'created_at'),
 
   author: DS.belongsTo('author'),
+
+  wasEdited: Ember.computed.gt('updated_at', 'created_at'),
+
   authorName: Ember.computed.readOnly('author.name'),
 
   isValidTitle: Ember.computed.gte('title.length', 3),

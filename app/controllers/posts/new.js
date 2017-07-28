@@ -1,15 +1,12 @@
 import Ember from 'ember';
+import PostMixin from '../../mixins/post';
 
-export default Ember.Controller.extend({
+export default Ember.Controller.extend(PostMixin, {
+  title: 'Create post',
+
   actions: {
-    savePost(newPost) {
-      newPost.save().then(() => {
-        this.get('model').setProperties({
-          title: '',
-          body: ''
-        });
-        this.transitionToRoute('posts/show', newPost.id);
-      });
+    savePost(post) {
+      post.save().then(this._afterSave.bind(this));
     }
   }
 });

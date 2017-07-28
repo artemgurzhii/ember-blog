@@ -4,5 +4,11 @@
       {{post.title}}
     {{/link-to}}
   </h2>
-  <p class="blog-post-body">{{post.body}}</p>
+  <div class="blog-post-body">
+    {{markdown-to-html markdown=post.body}}
+    {{format-date post.created_at}}
+    {{#if post.wasEdited}}
+      <h2>Post was edited</h2>
+    {{/if}}
+  </div>
 </div>
