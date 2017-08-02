@@ -3,8 +3,17 @@ const EmberApp = require('ember-cli/lib/broccoli/ember-app');
 
 module.exports = function(defaults) {
   var app = new EmberApp(defaults, {
+
+    // Sass options
     sassOptions: {
       extension: 'sass'
+    },
+
+    // Service Worker resources caching
+    'esw-cache-fallback': {
+      patterns: [
+        '/api/(.+)'
+      ],
     }
   });
 
