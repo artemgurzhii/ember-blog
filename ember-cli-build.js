@@ -2,8 +2,19 @@
 const EmberApp = require('ember-cli/lib/broccoli/ember-app');
 
 module.exports = function(defaults) {
-  var app = new EmberApp(defaults, {
 
+  // List of addons which to disable in the development mode
+  let disabledAddons = [];
+
+  if (EmberApp.env() !== 'production' && !process.env.ENABLE_SW) {
+    // disable service workers by default for dev and testing
+    disabledAddons.push('ember-service-worker');
+  }
+
+  var app = new EmberApp(defaults, {
+    addons: {
+      blacklist: disabledAddons
+    },
     // Sass options
     sassOptions: {
       extension: 'sass'
