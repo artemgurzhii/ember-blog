@@ -1,0 +1,19 @@
+<div class="container">
+  <div class="post-body">
+    <div class="col-md-6">
+      {{post-form post=post save='save' type=type showErrors=showErrors}}
+    </div>
+
+    <div class="col-md-6">
+      {{#if post.isPresent}}
+        <div class="post-preview">
+          <h1>{{post.title}}</h1>
+          <br>
+          {{markdown-to-html markdown=post.body}}
+        </div>
+      {{else}}
+        Post will go here ...
+      {{/if}}
+    </div>
+  </div>
+</div>

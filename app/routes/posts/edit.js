@@ -3,7 +3,7 @@ const { get } = Ember;
 
 export default Ember.Route.extend({
   model({ post_id: id }) {
-    return  this.store.findRecord('post', id);
+    return this.store.findRecord('post', id);
   },
 
   actions: {

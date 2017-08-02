@@ -1,27 +1,45 @@
 import DS from 'ember-data';
 import Ember from 'ember';
 
-export default DS.Model.extend({
-  title: DS.attr('string'),
-  body: DS.attr('string'),
-  created_at: DS.attr('date', {
+const {
+  Model,
+  belongsTo,
+  hasMany,
+  attr
+} = DS;
+
+const {
+  computed
+} = Ember;
+
+export default Model.extend({
+  title: attr('string'),
+  body: attr('string'),
+
+  created_at: attr('date', {
     defaultValue() {
       return new Date();
     }
   }),
-  updated_at: DS.attr('date', {
+  updated_at: attr('date', {
     defaultValue: null
   }),
 
-  author: DS.belongsTo('author'),
+  comments: hasMany('comment'),
+  user: belongsTo('user'),
 
-  wasEdited: Ember.computed.gt('updated_at', 'created_at'),
+  wasEdited: computed.gt('updated_at', 'created_at'),
 
-  authorName: Ember.computed.readOnly('author.name'),
+  userName: computed.readOnly('user.name'),
 
-  isValidTitle: Ember.computed.gte('title.length', 3),
-  isValidBody: Ember.computed.gte('body.length', 3),
+  isValidTitle: computed.gte('title.length', 3),
+  isValidBody: computed.gte('body.length', 3),
 
-  isValid: Ember.computed.and('isValidTitle', 'isValidBody'),
-  isInValid: Ember.computed.not('isValid')
+  isValid: computed.and('isValidTitle', 'isValidBody'),
+  isInValid: computed.not('isValid'),
+
+  titleIsNotEmpty: computed.notEmpty('title'),
+  bodyIsNotEmpty: computed.notEmpty('body'),
+
+  isPresent: computed.or('titleIsNotEmpty', 'bodyIsNotEmpty'),
 });
