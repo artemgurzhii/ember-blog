@@ -1,4 +1,14 @@
 import Ember from 'ember';
 
-export default Ember.Route.extend({
+const {
+  RSVP,
+  Route
+} = Ember;
+
+export default Route.extend({
+  model({ post_id: id }) {
+    return RSVP.hash({
+      post: this.store.findRecord('post', id)
+    });
+  }
 });

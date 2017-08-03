@@ -1,7 +1,15 @@
-<h1>{{model.title}}</h1>
+<h1>{{model.post.title}}</h1>
 
 <hr>
 
-{{markdown-to-html markdown=model.body}}
+{{markdown-to-html markdown=model.post.body}}
 
-<button type="delete" class="btn btn-primary" {{action "delete" model}}>Delete</button>
+<button type="delete" class="btn btn-primary" {{action "delete" model.post}}>Delete Post</button>
+
+<div class="post-comments">
+  {{#each model.comments as |comment|}}
+    {{post-comment comment=comment}}
+  {{else}}
+    <h3>Create first comment</h3>
+  {{/each}}
+</div>

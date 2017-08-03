@@ -15,7 +15,6 @@ Router.map(function() {
     this.route('edit', { path: '/:post_id/edit' });
     this.route('show', { path: '/:post_id' });
   });
-  this.route('login');
 });
 
 export default Router;

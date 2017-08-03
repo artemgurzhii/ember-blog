@@ -1,30 +1,39 @@
 import Ember from 'ember';
 
-const { get } = Ember;
+const {
+  set,
+  get
+} = Ember;
 
 export default Ember.Route.extend({
+  session: Ember.inject.service(),
+
   beforeModel() {
     return get(this, 'session')
             .fetch()
-            .catch(this._error.bind(this));
+            .catch(function() {});
   },
 
   actions: {
     login() {
       get(this, 'session')
-        .open('firebase', { provider: 'twitter' })
-        .then(this._success.bind(this));
+        .open('firebase', {
+          provider: 'twitter'
+        })
+        .then(this._success.bind(this))
+        .catch(this._error.bind(this));
     },
 
     logout() {
-      get(this,'session').close();
+      get(this, 'session').close();
     }
   },
 
-  _success(data) {
-    Ember.Loggger.log(data);
+  _success(message) {
+    Ember.Logger.log(`Logged in successfully: ${message}`);
   },
 
-  // Application route should return the session fetch promise
-  _error() {}
+  _error(error) {
+    Ember.Logger.warn(`Error occurred while logging in: ${error}`);
+  }
 });

@@ -1,5 +1,5 @@
 import Ember from 'ember';
 
 export default Ember.Component.extend({
-  classNames: ['post-errors']
+  classNames: ['post-comment']
 });

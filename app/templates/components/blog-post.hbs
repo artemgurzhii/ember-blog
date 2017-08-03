@@ -1,11 +1,11 @@
 <div class="blog-post">
+  {{post.user.name}}
   <h2 class="blog-post-title">
     {{#link-to "posts.show" post.id}}
       {{post.title}}
     {{/link-to}}
   </h2>
-  <div class="blog-post-body">
-    {{markdown-to-html post.excerpt}}
+  <div class="blog-post-desc">
     {{format-date post.created_at}}
 
     {{#if post.wasEdited}}

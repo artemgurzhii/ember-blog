@@ -11,15 +11,10 @@
     </div>
 
     <div class="collapse navbar-collapse" id="main-navbar">
-      <ul class="nav navbar-nav">
-        {{#if session.isAuthenticated}}
-          <li>{{link-to "Add New Post" "new"}}</li>
-        {{/if}}
-      </ul>
-
       <ul class="nav navbar-nav navbar-right">
         <li>{{link-to "About" "about"}}</li>
         <li>{{link-to "Contact" "contact"}}</li>
+
         <li class="dropdown">
           <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
             Blog<span class="caret"></span>
@@ -28,15 +23,17 @@
             <li>{{link-to "New blog post" "posts.new"}}</li>
           </ul>
         </li>
+
         {{#if session.isAuthenticated}}
-          <li><a href="#" {{action "logout"}}>Logout</a></li>
+          {{log session.currentUser}}
+          <li><a href="#" {{action (route-action 'logout')}}>Logout</a></li>
           <li>
-            <a href="http://twitter.com/{{session.currentUser.username}}" target="_blank">
-              <img src="{{session.currentUser.profileImageURL}}" height="30px" width="30px"/>
+            <a href="http://twitter.com/{{session.currentUser.displayName}}" target="_blank">
+              <img src="{{session.currentUser.photoURL}}" height="30px" width="30px"/>
             </a>
           </li>
         {{else}}
-          <li><a href="#" {{action "login"}}>Login</a></li>
+          <li><a href="#" {{action (route-action 'login')}}>Login</a></li>
         {{/if}}
       </ul>
     </div>

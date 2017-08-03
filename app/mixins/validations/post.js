@@ -11,6 +11,9 @@ export default Ember.Mixin.create(Validations, {
   validations: {
     'post.title': {
       presence: true,
+      presence: {
+        message: "Post title can't be blank"
+      },
       length: {
         minimum: TITLE_MIN_LENGTH,
         maximum: TITLE_MAX_LENGTH,
@@ -23,6 +26,9 @@ export default Ember.Mixin.create(Validations, {
 
     'post.body': {
       presence: true,
+      presence: {
+        message: "Post body can't be blank"
+      },
       length: {
         minimum: BODY_MIN_LENGTH,
         maximum: BODY_MAX_LENGTH,

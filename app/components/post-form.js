@@ -1,7 +1,9 @@
 import Ember from 'ember';
 import PostValidations from '../mixins/validations/post';
 
-const { get } = Ember;
+const {
+  get
+} = Ember;
 
 export default Ember.Component.extend(PostValidations, {
   actions: {
