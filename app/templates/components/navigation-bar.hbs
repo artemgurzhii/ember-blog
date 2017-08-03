@@ -15,17 +15,18 @@
         <li>{{link-to "About" "about"}}</li>
         <li>{{link-to "Contact" "contact"}}</li>
 
-        <li class="dropdown">
-          <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-            Blog<span class="caret"></span>
-          </a>
-          <ul class="dropdown-menu">
-            <li>{{link-to "New blog post" "posts.new"}}</li>
-          </ul>
-        </li>
-
         {{#if session.isAuthenticated}}
-          {{log session.currentUser}}
+          <li class="dropdown">
+            <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+              Blog<span class="caret"></span>
+            </a>
+            <ul class="dropdown-menu">
+              <li>{{link-to "New blog post" "posts.new"}}</li>
+            </ul>
+          </li>
+
+          <li>{{link-to 'Users' 'users'}}</li>
+
           <li><a href="#" {{action (route-action 'logout')}}>Logout</a></li>
           <li>
             <a href="http://twitter.com/{{session.currentUser.displayName}}" target="_blank">

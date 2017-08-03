@@ -3,17 +3,14 @@ import getOrCreateUser from '../utils/get-or-create-user';
 import PostMixin from '../mixins/post';
 
 const {
-  get,
-  getProperties
+  get
 } = Ember;
 
 export default Ember.Route.extend(PostMixin, {
   actions: {
     createComment(author, body, post) {
-      const {
-        username,
-        profileImageURL
-      } = getProperties(this, 'session.currentUser.displayName', 'session.currentUser.photoURL');
+      const displayName = get(this, 'session.currentUser.displayName');
+      const photoURL = get(this, 'session.currentUser.photoURL');
 
       const { store } = this;
       const uid = get(author, 'uid');
@@ -23,8 +20,8 @@ export default Ember.Route.extend(PostMixin, {
 
       getOrCreateUser(
         uid,
-        username,
-        profileImageURL,
+        displayName,
+        photoURL,
         store
       ).then(user => {
         get(user, 'comments').addObject(comment);

@@ -1,15 +1,15 @@
 <div class="container">
   <div class="post-body">
     <div class="col-md-6">
-      {{post-form save="save" post=post type=type showErrors=showErrors errors=errors}}
+      {{post-form save="save" model=model type=type}}
     </div>
 
     <div class="col-md-6">
-      {{#if post.isPresent}}
+      {{#if model.isPresent}}
         <div class="post-preview">
-          <h1>{{post.title}}</h1>
+          <h1>{{model.title}}</h1>
           <br>
-          {{markdown-to-html markdown=post.body}}
+          {{markdown-to-html markdown=model.body}}
         </div>
       {{else}}
         Post will go here ...

@@ -1,5 +1,6 @@
 import DS from 'ember-data';
 import Ember from 'ember';
+import { validator, buildValidations } from 'ember-cp-validations';
 
 const {
   Model,
@@ -12,7 +13,33 @@ const {
   computed
 } = Ember;
 
-export default Model.extend({
+const Validations = buildValidations({
+  title: {
+    description: 'Title',
+    validators: [
+      validator('presence', true),
+      validator('length', {
+        min: 3,
+        max: 100
+      })
+    ]
+  },
+
+  body: {
+    description: 'Body',
+    validators: [
+      validator('presence', true),
+      validator('length', {
+        min: 3,
+        max: 10000
+      })
+    ]
+  },
+  user: validator('belongs-to'),
+  comments: validator('has-many')
+});
+
+export default Model.extend(Validations, {
   title: attr('string'),
   body: attr('string'),
 
@@ -28,18 +55,8 @@ export default Model.extend({
   comments: hasMany('comment'),
   user: belongsTo('user'),
 
-  wasEdited: computed.gt('updated_at', 'created_at'),
+  isPresentTitle: computed.notEmpty('title'),
+  isPresentBody: computed.notEmpty('body'),
 
-  userName: computed.readOnly('user.name'),
-
-  isValidTitle: computed.gte('title.length', 3),
-  isValidBody: computed.gte('body.length', 3),
-
-  isValid: computed.and('isValidTitle', 'isValidBody'),
-  isInValid: computed.not('isValid'),
-
-  titleIsNotEmpty: computed.notEmpty('title'),
-  bodyIsNotEmpty: computed.notEmpty('body'),
-
-  isPresent: computed.or('titleIsNotEmpty', 'bodyIsNotEmpty'),
+  isPresent: computed.or('isPresentTitle', 'isPresentBody')
 });

@@ -1,20 +1,26 @@
 import Ember from 'ember';
-import PostValidations from './validations/post';
 import getOrCreateUser from '../utils/get-or-create-user';
 
 const {
   set,
   get,
-  isEqual,
-  getProperties
+  isEqual
 } = Ember;
 
-export default Ember.Mixin.create(PostValidations, {
+export default Ember.Mixin.create({
   /**
    * @description Callback function which to execute after post is being deleted.
    */
   _afterDelete() {
     this.transitionTo('posts');
+  },
+
+  /**
+   * @description Resetting post model fields.
+   */
+  _clearData() {
+    set(this, 'title', '');
+    set(this, 'body', '');
   },
 
   /**
@@ -44,10 +50,8 @@ export default Ember.Mixin.create(PostValidations, {
         store
       } = this;
 
-      const {
-        username,
-        profileImageURL
-      } = getProperties(this, 'session.currentUser.displayName', 'session.currentUser.photoURL');
+      const displayName = get(this, 'session.currentUser.displayName');
+      const photoURL = get(this, 'session.currentUser.photoURL');
 
       if (isEqual(type, 'edit')) {
         set(post, 'updated_at', new Date());
@@ -55,28 +59,18 @@ export default Ember.Mixin.create(PostValidations, {
 
       getOrCreateUser(
         uid,
-        username,
-        profileImageURL,
+        displayName,
+        photoURL,
         store
       ).then(userData => {
         get(userData, 'posts').addObject(post);
 
-        Ember.Logger.log(get(post, 'title'));
-
         post
-          .validate().then(function() {
-            Ember.Logger.log('Validating');
-            Ember.Logger.log(`isValid: ${get(post, 'isValid')}`);
-            Ember.Logger.log(`Errors: ${get(post, 'errors')}`);
-          })
           .save()
           .then(() => userData.save())
-          .then(this._afterSave.bind(this));
+          .then(this._clearData.bind(this))
+          .then(this._afterSave.bind(this, post));
       });
-
-      set(this, 'title', '');
-      set(this, 'body', '');
-      this.transitionTo('index');
     }
   }
 });
