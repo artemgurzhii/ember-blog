@@ -4,10 +4,11 @@ const {
   get,
   set,
   computed,
+  Component,
   defineProperty
 } = Ember;
 
-export default Ember.Component.extend({
+export default Component.extend({
   classNames: ['validated-input'],
   classNameBindings: ['showErrorClass:has-error', 'isValid:has-success'],
   model: null,

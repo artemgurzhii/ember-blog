@@ -19,7 +19,6 @@ const {
  * @return {Promise} - Finded/Created user record.
  */
 export default function getOrCreateUser(uid, username, avatar, store) {
-  console.log(arguments);
   return new Promise(resolve => {
     store.query('user', {
       orderBy: 'uid',

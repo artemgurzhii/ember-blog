@@ -2,10 +2,11 @@ import Ember from 'ember';
 
 const {
   set,
-  get
+  get,
+  Route
 } = Ember;
 
-export default Ember.Route.extend({
+export default Route.extend({
   session: Ember.inject.service(),
 
   beforeModel() {

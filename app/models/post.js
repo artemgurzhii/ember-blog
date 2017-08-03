@@ -58,5 +58,7 @@ export default Model.extend(Validations, {
   isPresentTitle: computed.notEmpty('title'),
   isPresentBody: computed.notEmpty('body'),
 
-  isPresent: computed.or('isPresentTitle', 'isPresentBody')
+  isPresent: computed.or('isPresentTitle', 'isPresentBody'),
+
+  wasEdited: computed.gt('updated_at', 'created_at')
 });

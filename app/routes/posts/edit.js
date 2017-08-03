@@ -1,10 +1,11 @@
 import Ember from 'ember';
 
 const {
-  get
+  get,
+  Route
 } = Ember;
 
-export default Ember.Route.extend({
+export default Route.extend({
   model({ post_id: id }) {
     return this.store.findRecord('post', id);
   },

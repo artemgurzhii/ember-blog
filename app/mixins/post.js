@@ -4,10 +4,11 @@ import getOrCreateUser from '../utils/get-or-create-user';
 const {
   set,
   get,
+  Mixin,
   isEqual
 } = Ember;
 
-export default Ember.Mixin.create({
+export default Mixin.create({
   /**
    * @description Callback function which to execute after post is being deleted.
    */
