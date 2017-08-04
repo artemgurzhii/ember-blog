@@ -13,7 +13,7 @@ export default Route.extend({
         filter: {
           user: id
         }
-      }),
+      })
     });
   }
 });

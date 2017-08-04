@@ -5,6 +5,11 @@
 {{markdown-to-html markdown=model.post.body}}
 
 <button type="delete" class="btn btn-primary" {{action "delete" model.post}}>Delete Post</button>
+<button type="delete" class="btn btn-primary edit-post">
+  {{#link-to 'posts.edit' model.post.id}}
+    Edit Post
+  {{/link-to}}
+</button>
 
 <div class="post-comments">
   {{#each model.comments as |comment|}}
