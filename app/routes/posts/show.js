@@ -15,5 +15,9 @@ export default Route.extend({
         }
       })
     });
+  },
+
+  titleToken(model) {
+    return model.post.get('title');
   }
 });

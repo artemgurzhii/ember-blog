@@ -3,7 +3,9 @@ import Ember from 'ember';
 const {
   get,
   Route,
-  Logge} = Ember;
+  Logger,
+  isEmpty
+} = Ember;
 
 export default Route.extend({
   session: Ember.inject.service(),
@@ -35,5 +37,14 @@ export default Route.extend({
 
   _error(error) {
     Logger.warn('Error occurred while logging in:', error);
-  }
+  },
+
+  title(tokens) {
+    const base = 'Ember Blog';
+    if (isEmpty(tokens)) {
+      return base;
+    }
+
+    return `${tokens.join(' - ')} - ${base}`;
+  },
 });

@@ -1,7 +1,8 @@
 import Ember from 'ember';
+import RSVP from 'rsvp';
 
 const {
-  RSVP,
+  get,
   Route
 } = Ember;
 
@@ -15,5 +16,9 @@ export default Route.extend({
         }
       })
     });
-  }
+  },
+
+  titleToken(model) {
+    return get(model, 'user.username');
+  },
 });

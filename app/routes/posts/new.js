@@ -20,5 +20,7 @@ export default Route.extend(PostWasCreated, {
     if (isEqual(isAuthenticated, false)) {
       this.transitionTo('posts');
     }
-  }
+  },
+
+  titleToken: 'New Post'
 });
