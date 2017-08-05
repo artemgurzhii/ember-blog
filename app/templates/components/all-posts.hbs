@@ -1,3 +1,10 @@
 {{#each posts as |post|}}
-  {{blog-post post=post}}
+
+  <!-- Make sure record exist -->
+  {{#if post.id}}
+    {{blog-post-preview post=post}}
+  {{/if}}
+{{else}}
+  <h2>No Posts were found</h2>
+  <h3>Create your first post!!!</h3> - {{link-to "Create Post" "posts.new"}}
 {{/each}}

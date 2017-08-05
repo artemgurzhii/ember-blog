@@ -3,10 +3,10 @@ const gap = 3;
 
 export function formatDate([date] = []) {
   if (date) {
-    const to_s = String(date);
-    const idx = to_s.lastIndexOf(':');
+    const stringDate = String(date);
+    const idx = stringDate.lastIndexOf(':');
 
-    return to_s.slice(0, idx + gap);
+    return stringDate.slice(0, idx + gap);
   }
 }
 

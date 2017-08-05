@@ -1,0 +1,8 @@
+<div class="box">
+  <img src="{{session.currentUser.photoURL}}" height="70px" width="70px"/>
+  {{#validated-input model=model.post.comments valuePath="body"}}
+    {{textarea rows="2" placeholder="Add New Comment" value=body}}
+  {{/validated-input}}
+
+  <button type="submit" class="btn btn-default" {{action "createComment" session body model.post}} tabindex="3">Submit</button>
+</div>

@@ -5,7 +5,8 @@ const {
   set,
   get,
   Mixin,
-  isEqual
+  isEqual,
+  setProperties
 } = Ember;
 
 export default Mixin.create({
@@ -20,8 +21,10 @@ export default Mixin.create({
    * @description Resetting post model fields.
    */
   _clearData() {
-    set(this, 'title', '');
-    set(this, 'body', '');
+    setProperties(this, {
+      title: '',
+      body: ''
+    });
   },
 
   /**
@@ -45,11 +48,15 @@ export default Mixin.create({
     },
 
     save(post, type) {
-      const uid = get(this, 'session.uid');
+      const isValid = get(post, 'validations.isValid');
 
-      const {
-        store
-      } = this;
+      if (isEqual(isValid, false)) {
+        alert('Error, post is not valid, please fix all errors and try again.');
+        return;
+      }
+
+      const uid = get(this, 'session.uid');
+      const store = get(this, 'store');
 
       const displayName = get(this, 'session.currentUser.displayName');
       const photoURL = get(this, 'session.currentUser.photoURL');

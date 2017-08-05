@@ -13,7 +13,7 @@ const {
   computed
 } = Ember;
 
-const Validations = buildValidations({
+const PostValidation = buildValidations({
   title: {
     description: 'Title',
     validators: [
@@ -37,9 +37,11 @@ const Validations = buildValidations({
   },
   user: validator('belongs-to'),
   comments: validator('has-many')
+}, {
+  debounce: 200
 });
 
-export default Model.extend(Validations, {
+export default Model.extend(PostValidation, {
   title: attr('string'),
   body: attr('string'),
 
@@ -52,13 +54,15 @@ export default Model.extend(Validations, {
     defaultValue: null
   }),
 
-  comments: hasMany('comment'),
-  user: belongsTo('user'),
+  comments: hasMany('comment', { async: true }),
+  user: belongsTo('user', { async: true }),
 
   isPresentTitle: computed.notEmpty('title'),
   isPresentBody: computed.notEmpty('body'),
 
   isPresent: computed.or('isPresentTitle', 'isPresentBody'),
 
-  wasEdited: computed.gt('updated_at', 'created_at')
+  wasEdited: computed.gt('updated_at', 'created_at'),
+
+  isAllowed: computed.equal('model.firstObject.user.username', 'session.currentUser.username')
 });

@@ -1,0 +1,7 @@
+<h4>Comments:</h4>
+
+{{#authorized-users-only session=session}}
+  {{comment-form session=session model=model createComment=(route-action "createComment")}}
+{{/authorized-users-only}}
+
+{{all-comments comments=model.post.comments}}

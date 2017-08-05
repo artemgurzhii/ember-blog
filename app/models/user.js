@@ -8,6 +8,6 @@ export default DS.Model.extend({
     defaultValue: 'John Doe'
   }),
 
-  posts: DS.hasMany('post'),
-  comments: DS.hasMany('comment')
+  posts: DS.hasMany('post', { async: true }),
+  comments: DS.hasMany('comment', { async: true })
 });

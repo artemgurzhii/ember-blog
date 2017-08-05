@@ -1,10 +1,9 @@
 import Ember from 'ember';
 
 const {
-  set,
   get,
-  Route
-} = Ember;
+  Route,
+  Logge} = Ember;
 
 export default Route.extend({
   session: Ember.inject.service(),
@@ -31,10 +30,10 @@ export default Route.extend({
   },
 
   _success(message) {
-    Ember.Logger.log(`Logged in successfully: ${message}`);
+    Logger.log('Logged in successfully: ', message);
   },
 
   _error(error) {
-    Ember.Logger.warn(`Error occurred while logging in: ${error}`);
+    Logger.warn('Error occurred while logging in:', error);
   }
 });

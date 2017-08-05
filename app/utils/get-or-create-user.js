@@ -1,11 +1,9 @@
 import Ember from 'ember';
+import RSVP from 'rsvp';
 
 const {
   get,
-  isEqual,
-  RSVP: {
-    Promise
-  }
+  isEqual
 } = Ember;
 
 /**
@@ -19,7 +17,7 @@ const {
  * @return {Promise} - Finded/Created user record.
  */
 export default function getOrCreateUser(uid, username, avatar, store) {
-  return new Promise(resolve => {
+  return new RSVP.Promise(resolve => {
     store.query('user', {
       orderBy: 'uid',
       equalTo: uid
@@ -33,6 +31,6 @@ export default function getOrCreateUser(uid, username, avatar, store) {
       } else {
         resolve(get(users, 'firstObject'));
       }
-    })
+    });
   });
 }

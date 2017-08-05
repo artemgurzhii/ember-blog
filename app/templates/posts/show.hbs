@@ -1,20 +1,14 @@
-<h1>{{model.post.title}}</h1>
+{{blog-post model=model}}
 
-<hr>
-
-{{markdown-to-html markdown=model.post.body}}
-
-<button type="delete" class="btn btn-primary" {{action "delete" model.post}}>Delete Post</button>
-<button type="delete" class="btn btn-primary edit-post">
-  {{#link-to 'posts.edit' model.post.id}}
-    Edit Post
-  {{/link-to}}
-</button>
+{{#authors-only session=session model=model}}
+  <button type="delete" class="btn btn-primary" {{action "delete" model.post}}>Delete Post</button>
+  <button type="delete" class="btn btn-primary edit-post">
+    {{#link-to 'posts.edit' model.post.id}}
+      Edit Post
+    {{/link-to}}
+  </button>
+{{/authors-only}}
 
 <div class="post-comments">
-  {{#each model.comments as |comment|}}
-    {{post-comment comment=comment}}
-  {{else}}
-    <h3>Create first comment</h3>
-  {{/each}}
+  {{outlet}}
 </div>
