@@ -1,6 +1,6 @@
 import DS from 'ember-data';
 import Ember from 'ember';
-import { validator, buildValidations } from 'ember-cp-validations';
+import PostValidations from '../mixins/validations/post';
 
 const {
   Model,
@@ -13,35 +13,7 @@ const {
   computed
 } = Ember;
 
-const PostValidation = buildValidations({
-  title: {
-    description: 'Title',
-    validators: [
-      validator('presence', true),
-      validator('length', {
-        min: 3,
-        max: 100
-      })
-    ]
-  },
-
-  body: {
-    description: 'Body',
-    validators: [
-      validator('presence', true),
-      validator('length', {
-        min: 3,
-        max: 10000
-      })
-    ]
-  },
-  user: validator('belongs-to'),
-  comments: validator('has-many')
-}, {
-  debounce: 200
-});
-
-export default Model.extend(PostValidation, {
+export default Model.extend(PostValidations, {
   title: attr('string'),
   body: attr('string'),
 
@@ -59,8 +31,6 @@ export default Model.extend(PostValidation, {
 
   isPresentTitle: computed.notEmpty('title'),
   isPresentBody: computed.notEmpty('body'),
-
-  isPresent: computed.or('isPresentTitle', 'isPresentBody'),
 
   wasEdited: computed.gt('updated_at', 'created_at'),
 

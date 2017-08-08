@@ -1,5 +1,5 @@
 import DS from 'ember-data';
-import { validator, buildValidations } from 'ember-cp-validations';
+import CommentValidations from '../mixins/validations/comment';
 
 const {
   attr,
@@ -7,24 +7,7 @@ const {
   belongsTo
 } = DS;
 
-const PostCommentValidation = buildValidations({
-  body: {
-    description: 'Body',
-    validators: [
-      validator('presence', true),
-      validator('length', {
-        min: 1,
-        max: 10000
-      })
-    ]
-  },
-  post: validator('belongs-to'),
-  user: validator('belongs-to')
-}, {
-  debounce: 200
-});
-
-export default Model.extend(PostCommentValidation, {
+export default Model.extend(CommentValidations, {
   body: attr('string'),
   user: belongsTo('user', { async: true }),
   post: belongsTo('post', { async: true })
