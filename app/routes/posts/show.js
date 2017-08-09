@@ -2,6 +2,7 @@ import Ember from 'ember';
 import RSVP from 'rsvp';
 
 const {
+  get,
   Route
 } = Ember;
 
@@ -13,11 +14,12 @@ export default Route.extend({
         filter: {
           post: id
         }
-      })
+      }),
+      comment: this.store.createRecord('comment')
     });
   },
 
   titleToken(model) {
-    return model.post.get('title');
+    return get(model, 'post.title');
   }
 });

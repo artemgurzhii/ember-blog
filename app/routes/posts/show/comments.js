@@ -4,45 +4,39 @@ import getOrCreateUser from '../../../utils/get-or-create-user';
 const {
   get,
   Route,
-  Logger
+  Logger,
+  isEqual
 } = Ember;
 
 export default Route.extend({
   actions: {
-    createComment(author, body, post) {
-      const user = getOrCreateUser(
-        get(author, 'uid'),
+    save(comment, post) {
+      const isValid = get(comment, 'validations.isValid');
+
+      if (isEqual(isValid, false)) {
+        alert('Error, comment is not valid, please fix all errors and try again.');
+        return;
+      }
+
+      getOrCreateUser(
+        get(this, 'session.uid'),
         get(this, 'session.currentUser.displayName'),
         get(this, 'session.currentUser.photoURL'),
         get(this, 'store')
-      );
+      ).then(user => {
+        get(user, 'comments').addObject(comment);
+        get(post, 'comments').addObject(comment);
 
-      const comment = this.store.createRecord('comment', { body });
-
-      comment
-        .validate()
-        .then(({ validations }) => {
-          if (get(validations, 'isValid')) {
-            this._createComment(user, post, comment);
-          }
+        this._saveRecord(comment)
+          .then(this._saveRecord.bind(this, post))
+          .then(this._saveRecord.bind(this, user))
+          .then(this._success.bind(this))
+          .catch(error => this._error(error, user, post, comment));
         });
     }
   },
 
-  _createComment(user, post, comment) {
-    user.then(userData => {
-      get(userData, 'comments').addObject(comment);
-      get(post, 'comments').addObject(comment);
-
-      this._save(comment)
-        .then(this._save.bind(this, post))
-        .then(this._save.bind(this, userData))
-        .then(this._success.bind(this))
-        .catch(error => this._error(error, user, post, comment));
-      });
-  },
-
-  _save(model) {
+  _saveRecord(model) {
     return model.save();
   },
 

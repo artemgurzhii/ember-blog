@@ -2,6 +2,7 @@ import Ember from 'ember';
 import PostWasModified from '../../mixins/post/was-modified-or-created';
 
 const {
+  get,
   Route
 } = Ember;
 
@@ -11,7 +12,8 @@ export default Route.extend(PostWasModified, {
   },
 
   titleToken(model) {
-    const title = model.post.get('title');
-    return `Edit ${title}`
-  },
+    const title = get(model, 'title');
+
+    return `Edit ${title}`;
+  }
 });

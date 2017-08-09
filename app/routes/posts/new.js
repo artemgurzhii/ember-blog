@@ -8,7 +8,8 @@ const {
 } = Ember;
 
 export default Route.extend(PostWasCreated, {
-  session: Ember.inject.service(),
+  session: Ember.inject.service('session'),
+  titleToken: 'New Post',
 
   model() {
     return this.store.createRecord('post');
@@ -20,7 +21,5 @@ export default Route.extend(PostWasCreated, {
     if (isEqual(isAuthenticated, false)) {
       this.transitionTo('posts');
     }
-  },
-
-  titleToken: 'New Post'
+  }
 });

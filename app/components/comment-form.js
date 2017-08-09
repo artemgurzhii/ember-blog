@@ -7,9 +7,9 @@ const {
 
 export default Ember.Component.extend({
   actions: {
-    createComment(author, body, post) {
-      get(this, 'createComment')(author, body, post);
-      set(this, 'body', '');
+    save(comment, post) {
+      get(this, 'save')(comment, post);
+      set(comment, 'body', '');
     }
   }
 });

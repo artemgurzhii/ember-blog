@@ -1,6 +1,6 @@
-{{blog-post model=model}}
+{{blog-post post=model.post}}
 
-{{#authors-only session=session model=model}}
+{{#authors-only session=session model=model.post}}
   <button type="delete" class="btn btn-primary" {{action "delete" model.post}}>Delete Post</button>
   <button type="delete" class="btn btn-primary edit-post">
     {{#link-to 'posts.edit' model.post.id}}

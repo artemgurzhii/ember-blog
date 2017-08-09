@@ -1,5 +1,10 @@
 {{#each comments as |comment|}}
-  {{blog-post-comment comment=comment}}
+
+  <!-- Make sure record exist -->
+  {{#if comment.id}}
+    {{blog-post-comment comment=comment}}
+  {{/if}}
 {{else}}
+  <h2>No Comments were found</h2>
   <h3>Create first comment</h3>
 {{/each}}
