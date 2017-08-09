@@ -1,0 +1,24 @@
+{
+  "rules": {
+    ".read": true,
+    ".write": true,
+
+    "posts": {
+      ".read": true,
+
+      "$postId": {
+        ".write": "!data.exists() && newData.exists() || data.child('author').val() == auth.uid",
+        ".validate": "newData.hasChildren(['title', 'body', 'user'])"
+      }
+    }
+  },
+
+  "hosting": {
+    "firebase": "ember-blog",
+    "public": "dist",
+    "rewrites": [{
+      "source": "**",
+      "destination": "/index.html"
+    }]
+  }
+}
