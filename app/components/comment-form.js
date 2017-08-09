@@ -2,10 +2,11 @@ import Ember from 'ember';
 
 const {
   set,
-  get
+  get,
+  Component
 } = Ember;
 
-export default Ember.Component.extend({
+export default Component.extend({
   actions: {
     save(comment, post) {
       get(this, 'save')(comment, post);

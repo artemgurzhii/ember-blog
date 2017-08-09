@@ -3,7 +3,7 @@ import RSVP from 'rsvp';
 
 const {
   get,
-  isEqual
+  isEmpty
 } = Ember;
 
 /**
@@ -22,7 +22,7 @@ export default function getOrCreateUser(uid, username, avatar, store) {
       orderBy: 'uid',
       equalTo: uid
     }).then(users => {
-      if (isEqual(get(users, 'length'), 0)) {
+      if (isEmpty(users)) {
         resolve(store.createRecord('user', {
           uid,
           username,

@@ -1,0 +1,17 @@
+#!/usr/bin/env bash
+
+set -e # terminate the script if any command fails
+
+# Create the log directory if it does not exist
+if [ ! -x log ]; then
+  mkdir log
+fi
+
+# Install firebase CLI
+npm install -g firebase-tools
+
+# Build Ember App
+ember build -prod
+
+# Deploy app
+firebase deploy

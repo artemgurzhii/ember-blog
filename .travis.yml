@@ -22,3 +22,6 @@ install:
 
 script:
   - npm test
+
+after_success:
+  - ./scripts/deploy
