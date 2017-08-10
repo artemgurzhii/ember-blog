@@ -4,5 +4,5 @@
     {{textarea rows="2" placeholder="Add New Comment" value=model.comment.body}}
   {{/validated-input}}
 
-  <button type="submit" class="btn btn-default" {{action "save" model.comment model.post}} disabled={{model.comment.validations.isInvalid}} tabindex="3">Create Comment</button>
+  <button type="submit" class="btn btn-default" {{action "save" model.comment model.post}} disabled={{unless model.comment.validations.isTruelyValid true}} tabindex="3">Create Comment</button>
 </div>

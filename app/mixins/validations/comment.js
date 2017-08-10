@@ -6,13 +6,11 @@ export default buildValidations({
     validators: [
       validator('presence', true),
       validator('length', {
-        min: 10,
+        min: 1,
         max: 10000
       })
     ]
   },
   post: validator('belongs-to'),
   user: validator('belongs-to')
-}, {
-  debounce: 200
 });
