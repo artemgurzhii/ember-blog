@@ -31,7 +31,7 @@ export default Model.extend(PostValidations, {
     defaultValue: null
   }),
 
-  comments: hasMany('comment'),
+  comments: hasMany('comment', { async: true }),
   user: belongsTo('user'),
 
   isPresentTitle: notEmpty('title'),

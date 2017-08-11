@@ -4,8 +4,7 @@ import AuthenticatedOnly from '../../mixins/authenticated-only';
 
 const {
   get,
-  Route,
-  isEqual
+  Route
 } = Ember;
 
 export default Route.extend(AuthenticatedOnly, PostWasModified, {
