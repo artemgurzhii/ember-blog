@@ -52,24 +52,19 @@ export default Mixin.create({
 
       if (isEqual(isValid, false)) {
         alert('Error, post is not valid, please fix all errors and try again.');
+
         return;
       }
-
-      const uid = get(this, 'session.uid');
-      const store = get(this, 'store');
-
-      const displayName = get(this, 'session.currentUser.displayName');
-      const photoURL = get(this, 'session.currentUser.photoURL');
 
       if (isEqual(type, 'edit')) {
         set(post, 'updated_at', new Date());
       }
 
       getOrCreateUser(
-        uid,
-        displayName,
-        photoURL,
-        store
+        get(this, 'session.uid'),
+        get(this, 'session.currentUser.displayName'),
+        get(this, 'session.currentUser.photoURL'),
+        get(this, 'store')
       ).then(userData => {
         get(userData, 'posts').addObject(post);
 
