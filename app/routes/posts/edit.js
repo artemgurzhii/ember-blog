@@ -7,8 +7,8 @@ const {
 } = Ember;
 
 export default Route.extend(PostWasModified, {
-  model({ post_id: id }) {
-    return this.store.findRecord('post', id);
+  model(params) {
+    return this.store.findRecord('post', params.post_id);
   },
 
   titleToken(model) {

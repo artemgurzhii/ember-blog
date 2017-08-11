@@ -1,5 +1,7 @@
 import Ember from 'ember';
+import RSVP from 'rsvp';
 import getOrCreateUser from '../../../utils/get-or-create-user';
+import STATE from '../../../utils/states';
 
 const {
   get,
@@ -10,12 +12,17 @@ const {
 
 export default Route.extend({
   actions: {
-    save(comment, post) {
+
+    // NOTE: Action returns state, on which depends whether comment text field should be cleared.
+    save(body, post) {
+      const comment = this.store.createRecord('comment', { body });
+
       const isValid = get(comment, 'validations.isValid');
 
       if (isEqual(isValid, false)) {
         alert('Error, comment is not valid, please fix all errors and try again.');
-        return;
+        comment.destroyRecord();
+        return STATE.FAIL;
       }
 
       getOrCreateUser(
@@ -33,6 +40,8 @@ export default Route.extend({
           .then(this._success.bind(this))
           .catch(error => this._error(error, user, post, comment));
         });
+
+      return STATE.SUCCESS;
     }
   },
 

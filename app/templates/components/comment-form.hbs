@@ -1,8 +1,10 @@
 <div class="box">
   <img src="{{session.currentUser.photoURL}}" height="70px" width="70px"/>
-  {{#validated-input model=model.comment valuePath="body"}}
-    {{textarea rows="2" placeholder="Add New Comment" value=model.comment.body}}
+  {{#validated-input model=model valuePath="body"}}
+    {{textarea rows="2" placeholder="Add New Comment" value=body onchange=(action (mut body) value="target.value")}}
   {{/validated-input}}
 
-  <button type="submit" class="btn btn-default" {{action "save" model.comment model.post}} disabled={{unless model.comment.validations.isTruelyValid true}} tabindex="3">Create Comment</button>
+  <button type="submit" class="btn btn-default" {{action "save" body}} tabindex="3">Create Comment</button>
+
+  <button type="submit" class="btn btn-default" {{action "save" body}} disabled={{unless comment.validations.isTruelyValid true}} tabindex="3">Create Comment</button>
 </div>

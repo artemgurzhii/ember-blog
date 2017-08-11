@@ -32,6 +32,8 @@ export default Model.extend(PostValidations, {
   isPresentTitle: computed.notEmpty('title'),
   isPresentBody: computed.notEmpty('body'),
 
+  isPresent: computed.or('isPresentTitle', 'isPresentBody'),
+
   wasEdited: computed.gt('updated_at', 'created_at'),
 
   isAllowed: computed.equal('model.firstObject.user.username', 'session.currentUser.username')

@@ -3,7 +3,9 @@ import RSVP from 'rsvp';
 
 const {
   get,
-  isEmpty
+  Logger,
+  isNone,
+  isEmpty,
 } = Ember;
 
 /**
@@ -17,6 +19,16 @@ const {
  * @return {Promise} - Finded/Created user record.
  */
 export default function getOrCreateUser(uid, username, avatar, store) {
+  if (
+    isNone(uid) ||
+    isNone(username) ||
+    isNone(avatar) ||
+    isNone(store)
+  ) {
+    Logger.warn('Wrong arguments passed: Expected - (uid, username, avatar, store), instead got');
+    console.table(arguments);
+  }
+
   return new RSVP.Promise(resolve => {
     store.query('user', {
       orderBy: 'uid',

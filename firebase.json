@@ -10,6 +10,14 @@
         ".write": "!data.exists() && newData.exists() || data.child('author').val() == auth.uid",
         ".validate": "newData.hasChildren(['title', 'body', 'user'])"
       }
+    },
+
+    "users": {
+      ".read": true,
+
+      "$userId": {
+        ".indexOn": "uid"
+      }
     }
   },
 

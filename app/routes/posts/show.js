@@ -14,8 +14,7 @@ export default Route.extend({
         filter: {
           post: id
         }
-      }),
-      comment: this.store.createRecord('comment')
+      })
     });
   },
 
