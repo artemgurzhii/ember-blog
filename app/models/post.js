@@ -10,7 +10,12 @@ const {
 } = DS;
 
 const {
-  computed
+  computed: {
+    notEmpty,
+    or,
+    gt,
+    equal,
+  }
 } = Ember;
 
 export default Model.extend(PostValidations, {
@@ -26,15 +31,14 @@ export default Model.extend(PostValidations, {
     defaultValue: null
   }),
 
-  comments: hasMany('comment', { async: true }),
-  user: belongsTo('user', { async: true }),
+  comments: hasMany('comment'),
+  user: belongsTo('user'),
 
-  isPresentTitle: computed.notEmpty('title'),
-  isPresentBody: computed.notEmpty('body'),
+  isPresentTitle: notEmpty('title'),
+  isPresentBody: notEmpty('body'),
+  isPresent: or('isPresentTitle', 'isPresentBody'),
 
-  isPresent: computed.or('isPresentTitle', 'isPresentBody'),
+  wasEdited: gt('updated_at', 'created_at'),
 
-  wasEdited: computed.gt('updated_at', 'created_at'),
-
-  isAllowed: computed.equal('model.firstObject.user.username', 'session.currentUser.username')
+  isAllowed: equal('model.firstObject.user.username', 'session.currentUser.username')
 });

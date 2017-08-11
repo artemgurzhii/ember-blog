@@ -1,8 +1,8 @@
 import Ember from 'ember';
-import RSVP from 'rsvp';
 
 const {
   get,
+  RSVP,
   Logger,
   isNone,
   isEmpty,
@@ -19,12 +19,7 @@ const {
  * @return {Promise} - Finded/Created user record.
  */
 export default function getOrCreateUser(uid, username, avatar, store) {
-  if (
-    isNone(uid) ||
-    isNone(username) ||
-    isNone(avatar) ||
-    isNone(store)
-  ) {
+  if (Array.from(arguments).any(isNone)) {
     Logger.warn('Wrong arguments passed: Expected - (uid, username, avatar, store), instead got');
     console.table(arguments);
   }

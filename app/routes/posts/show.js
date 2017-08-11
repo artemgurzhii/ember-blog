@@ -1,20 +1,23 @@
 import Ember from 'ember';
-import RSVP from 'rsvp';
 
 const {
   get,
+  RSVP,
   Route
 } = Ember;
 
 export default Route.extend({
   model({ post_id: id }) {
+    const post = this.store.findRecord('post', id);
+    const comments = this.store.findAll('comment', {
+      filter: {
+        post: id
+      }
+    });
+
     return RSVP.hash({
-      post: this.store.findRecord('post', id),
-      comments: this.store.findAll('comment', {
-        filter: {
-          post: id
-        }
-      })
+      post,
+      comments
     });
   },
 

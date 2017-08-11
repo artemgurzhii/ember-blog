@@ -1,5 +1,4 @@
 import Ember from 'ember';
-import RSVP from 'rsvp';
 import getOrCreateUser from '../../../utils/get-or-create-user';
 import STATE from '../../../utils/states';
 
@@ -22,6 +21,7 @@ export default Route.extend({
       if (isEqual(isValid, false)) {
         alert('Error, comment is not valid, please fix all errors and try again.');
         comment.destroyRecord();
+
         return STATE.FAIL;
       }
 

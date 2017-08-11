@@ -10,8 +10,7 @@ const {
 
 export default Component.extend({
   actions: {
-    save(body) {
-      const post = get(this, 'post');
+    save(body, post) {
       const result = get(this, 'save')(body, post);
 
       if (isEqual(result, STATE.SUCCESS)) {

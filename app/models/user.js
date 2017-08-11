@@ -1,13 +1,19 @@
 import DS from 'ember-data';
 
-export default DS.Model.extend({
-  uid: DS.attr('string'),
-  avatar: DS.attr('string'),
+const {
+  Model,
+  hasMany,
+  attr
+} = DS;
 
-  username: DS.attr('string', {
+export default Model.extend({
+  uid: attr('string'),
+  avatar: attr('string'),
+
+  username: attr('string', {
     defaultValue: 'John Doe'
   }),
 
-  posts: DS.hasMany('post', { async: true }),
-  comments: DS.hasMany('comment', { async: true })
+  posts: hasMany('post'),
+  comments: hasMany('comment')
 });

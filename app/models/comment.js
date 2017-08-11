@@ -9,6 +9,6 @@ const {
 
 export default Model.extend(CommentValidations, {
   body: attr('string'),
-  user: belongsTo('user', { async: true }),
-  post: belongsTo('post', { async: true })
+  user: belongsTo('user'),
+  post: belongsTo('post')
 });
