@@ -1,7 +1,7 @@
 <h4>Comments:</h4>
 
 {{#authorized-users-only session=session}}
-  {{comment-form session=session model=model post=model.post save=(route-action "save")}}
+  {{comment-form session=session model=model.comments post=model save=(route-action "save")}}
 {{/authorized-users-only}}
 
 {{all-comments comments=model.comments}}

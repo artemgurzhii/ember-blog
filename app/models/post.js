@@ -10,13 +10,15 @@ const {
 } = DS;
 
 const {
-  computed: {
-    notEmpty,
-    or,
-    gt,
-    equal,
-  }
+  get,
+  computed
 } = Ember;
+
+const {
+  notEmpty,
+  or,
+  gt
+} = computed;
 
 export default Model.extend(PostValidations, {
   title: attr('string'),
@@ -40,5 +42,7 @@ export default Model.extend(PostValidations, {
 
   wasEdited: gt('updated_at', 'created_at'),
 
-  isAllowed: equal('model.firstObject.user.username', 'session.currentUser.username')
+  isAllowed: computed('model.firstObject.user.username', 'session.currentUser.username', function(){
+    return get(this,'model.firstObject.user.username') === get(this,'session.currentUser.username');
+  })
 });
