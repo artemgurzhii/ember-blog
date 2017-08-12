@@ -1,13 +1,27 @@
-<h2 class="blog-post-title">
-  {{#link-to "posts.show" post.id}}
-    {{post.title}}
-  {{/link-to}}
-</h2>
+<div class="blog-post-photo left-side">
+  <img class="blog-post-image" src={{post.image}} alt="post image user">
+</div>
 
-<div class="blog-post-desc">
-  {{format-date post.created_at}}
+<div class="blog-post-desc-wrapper right-side">
+  <h2>
+    {{#link-to "posts.show" post.id}}
+      {{capitalize post.title}}
+    {{/link-to}}
+  </h2>
 
-  {{#if post.wasEdited}}
-    <h2>Post was edited</h2>
-  {{/if}}
+  <div class="blog-post-about">
+    by <b>
+      {{#link-to "users.show" post.user.id}}
+        {{post.user.username}}
+      {{/link-to}}
+    </b> at {{format-date post.created_at}}
+
+    {{#if post.wasEdited}}
+      • <h2>Post was edited</h2>
+    {{/if}}
+  </div>
+
+  <div class="blog-post-desc">
+    Post preview: {{markdown-to-html (excerpt post.body 100)}}
+  </div>
 </div>

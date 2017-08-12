@@ -20,6 +20,15 @@ Router.map(function() {
   this.route('users', function() {
     this.route('show', { path: '/:user_id' });
   });
+  this.route('tags', function() {
+    this.route('show', { path: '/:tag_id' });
+  });
+  this.route('categories', function() {
+    this.route('show', { path: '/:category_id' });
+  });
+  this.route('admin', function() {
+    this.route('tags');
+  });
 });
 
 export default Router;

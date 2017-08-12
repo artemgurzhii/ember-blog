@@ -5,5 +5,5 @@ const {
 } = Ember;
 
 export default Component.extend({
-  classNames: ['blog-post']
+  classNames: ['user-profile']
 });

@@ -3,26 +3,40 @@ import Ember from 'ember';
 import PostValidations from '../mixins/validations/post';
 
 const {
+  attr,
   Model,
-  belongsTo,
   hasMany,
-  attr
+  belongsTo
 } = DS;
 
 const {
   get,
-  computed
+  computed,
+  generateGuid
 } = Ember;
 
 const {
-  notEmpty,
   or,
-  gt
+  gt,
+  notEmpty
 } = computed;
 
 export default Model.extend(PostValidations, {
   title: attr('string'),
   body: attr('string'),
+
+  image: attr('string', {
+
+    /**
+     * @description Generate uniq ID, drop 'ember' part to use it as image number
+     */
+    defaultValue() {
+      const guid = generateGuid();
+      const number = guid.replace('ember', '');
+
+      return `https://unsplash.it/200/200/?image=${number}`;
+    }
+  }),
 
   created_at: attr('date', {
     defaultValue() {
@@ -33,7 +47,11 @@ export default Model.extend(PostValidations, {
     defaultValue: null
   }),
 
+  category: hasMany('category', { async: true }),
+
+  tag: hasMany('tag', { async: true }),
   comments: hasMany('comment', { async: true }),
+
   user: belongsTo('user'),
 
   isPresentTitle: notEmpty('title'),
