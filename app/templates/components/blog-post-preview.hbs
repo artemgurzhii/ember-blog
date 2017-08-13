@@ -3,13 +3,19 @@
 </div>
 
 <div class="blog-post-desc-wrapper right-side">
-  <h2>
-    {{#link-to "posts.show" post.id}}
-      {{capitalize post.title}}
-    {{/link-to}}
-  </h2>
+  <header>
+    <h2>
+      {{#link-to "posts.show" post.id}}
+        {{capitalize post.title}}
+      {{/link-to}}
+    </h2>
 
-  <div class="blog-post-about">
+    <div class="blog-post-desc">
+      {{markdown-to-html (excerpt post.body 100)}}
+    </div>
+  </header>
+
+  <footer class="blog-post-about">
     by <b>
       {{#link-to "users.show" post.user.id}}
         {{post.user.username}}
@@ -19,9 +25,5 @@
     {{#if post.wasEdited}}
       • <h2>Post was edited</h2>
     {{/if}}
-  </div>
-
-  <div class="blog-post-desc">
-    Post preview: {{markdown-to-html (excerpt post.body 100)}}
-  </div>
+  </footer>
 </div>
