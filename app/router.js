@@ -16,6 +16,7 @@ Router.map(function() {
     this.route('show', { path: '/:post_id' }, function() {
       this.route('comments', { path: '/' });
     });
+    this.route('search');
   });
   this.route('users', function() {
     this.route('show', { path: '/:user_id' });
