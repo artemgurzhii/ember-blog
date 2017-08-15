@@ -9,7 +9,6 @@ You will need the following things properly installed on your computer.
 
 * [Git](https://git-scm.com/)
 * [Node.js](https://nodejs.org/) (with NPM)
-* [Bower](https://bower.io/)
 * [Ember CLI](https://ember-cli.com/)
 * [PhantomJS](http://phantomjs.org/)
 
@@ -18,7 +17,6 @@ You will need the following things properly installed on your computer.
 * `git clone <repository-url>` this repository
 * `cd ember-blog`
 * `npm install`
-* `bower install`
 
 ## Running / Development
 
@@ -50,9 +48,3 @@ Specify what it takes to deploy your app.
 * Development Browser Extensions
   * [ember inspector for chrome](https://chrome.google.com/webstore/detail/ember-inspector/bmdblncegkenkacieihfhpjfppoconhi)
   * [ember inspector for firefox](https://addons.mozilla.org/en-US/firefox/addon/ember-inspector/)
-
-
-
-Posts/edit
-  - submit button doesn't work
-  - prevent not owner users from visiting

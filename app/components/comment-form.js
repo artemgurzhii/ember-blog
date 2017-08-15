@@ -9,6 +9,8 @@ const {
 } = Ember;
 
 export default Component.extend({
+  classNames: ['box', 'comment-form'],
+
   actions: {
     save(body, post) {
       const result = get(this, 'save')(body, post);

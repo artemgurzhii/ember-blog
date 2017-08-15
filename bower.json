@@ -1,5 +1,6 @@
 {
   "name": "ember-blog",
   "dependencies": {
+    "mousetrap": "~1.5.2"
   }
 }

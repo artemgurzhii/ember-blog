@@ -9,6 +9,17 @@ const {
 
 export default Model.extend(CommentValidations, {
   body: attr('string'),
-  user: belongsTo('user'),
-  post: belongsTo('post')
+
+  created_at: attr('date', {
+    defaultValue() {
+      return new Date();
+    }
+  }),
+
+  user: belongsTo('user', {
+    async: true
+  }),
+  post: belongsTo('post', {
+    async: true
+  })
 });

@@ -9,5 +9,7 @@ const {
 export default Model.extend({
   name: attr('string'),
 
-  post: belongsTo('post')
+  post: belongsTo('post', {
+    async: true
+  })
 });

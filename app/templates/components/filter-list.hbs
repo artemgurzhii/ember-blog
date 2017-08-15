@@ -1,9 +1,7 @@
-<div class="col-md-6 col-xs-12">
-  {{input class="form-control"
-          tabindex="1"
-          value=value
-          key-up=(action "handleFilterEntry")
-          placeholder=placeholder}}
+{{input class="form-control"
+        tabindex="1"
+        value=value
+        key-up=(action "handleFilterEntry")
+        placeholder=placeholder}}
 
-  {{yield results}}
-</div>
+{{yield results}}

@@ -14,6 +14,10 @@ export default Model.extend({
     defaultValue: 'John Doe'
   }),
 
-  posts: hasMany('post'),
-  comments: hasMany('comment')
+  posts: hasMany('post', {
+    async: true
+  }),
+  comments: hasMany('comment', {
+    async: true
+  })
 });

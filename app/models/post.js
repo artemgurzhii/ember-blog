@@ -47,12 +47,21 @@ export default Model.extend(PostValidations, {
     defaultValue: null
   }),
 
-  category: hasMany('category', { async: true }),
+  category: hasMany('category', {
+    async: true
+  }),
 
-  tag: hasMany('tag', { async: true }),
-  comments: hasMany('comment', { async: true }),
+  tag: hasMany('tag', {
+    async: true
+  }),
 
-  user: belongsTo('user'),
+  comments: hasMany('comment', {
+    async: true
+  }),
+
+  user: belongsTo('user', {
+    async: true
+  }),
 
   isPresentTitle: notEmpty('title'),
   isPresentBody: notEmpty('body'),

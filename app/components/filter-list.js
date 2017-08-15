@@ -8,7 +8,7 @@ const {
 } = Ember;
 
 export default Component.extend({
-  classNames: ['filter-list'],
+  classNames: ['filter-list', 'col-md-6', 'col-xs-12'],
   value: '',
 
   init() {
@@ -21,6 +21,7 @@ export default Component.extend({
 
   actions: {
     handleFilterEntry() {
+      console.log(12312);
       const {
         value: filerValue,
         filter: filterAction
@@ -39,9 +40,9 @@ export default Component.extend({
             const titleChars = this._clean(get(result, 'title'));
             const filerValueChars = this._clean(filerValue);
 
-            const isContains = filerValueChars.every(char => titleChars.includes(char));
+            const isMatching = filerValueChars.every(char => titleChars.includes(char));
 
-            if (isContains) {
+            if (isMatching) {
               res.push(result);
             }
           });
