@@ -21,7 +21,6 @@ export default Component.extend({
 
   actions: {
     handleFilterEntry() {
-      console.log(12312);
       const {
         value: filerValue,
         filter: filterAction

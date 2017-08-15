@@ -67,9 +67,5 @@ export default Model.extend(PostValidations, {
   isPresentBody: notEmpty('body'),
   isPresent: or('isPresentTitle', 'isPresentBody'),
 
-  wasEdited: gt('updated_at', 'created_at'),
-
-  isAllowed: computed('model.firstObject.user.username', 'session.currentUser.username', function(){
-    return get(this,'model.firstObject.user.username') === get(this,'session.currentUser.username');
-  })
+  wasEdited: gt('updated_at', 'created_at')
 });

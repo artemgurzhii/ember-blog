@@ -5,7 +5,7 @@ const {
   RSVP,
   Logger,
   isNone,
-  isEmpty,
+  isEmpty
 } = Ember;
 
 /**
@@ -20,8 +20,7 @@ const {
  */
 export default function getOrCreateUser(uid, username, avatar, store) {
   if (Array.from(arguments).any(isNone)) {
-    Logger.warn('Wrong arguments passed: Expected - (uid, username, avatar, store), instead got');
-    console.table(arguments);
+    Logger.warn('Wrong arguments passed: Expected - uid, username, avatar, store');
   }
 
   return new RSVP.Promise(resolve => {
