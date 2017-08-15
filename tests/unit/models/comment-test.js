@@ -1,12 +1,14 @@
 import { moduleForModel, test } from 'ember-qunit';
 
 moduleForModel('comment', 'Unit | Model | comment', {
-  // Specify the other units that are required for this test.
   needs: ['model:user', 'model:post']
 });
 
 test('it exists', function(assert) {
-  let model = this.subject();
-  // let store = this.store();
-  assert.ok(!!model);
+  const model = this.subject({
+    body: 'hello'
+  });
+  const created_at = model.get('created_at');
+
+  assert.equal(Ember.typeOf(created_at), 'date');
 });

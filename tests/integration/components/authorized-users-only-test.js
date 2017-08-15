@@ -6,17 +6,21 @@ moduleForComponent('authorized-users-only', 'Integration | Component | authorize
 });
 
 test('it renders', function(assert) {
-
-  // Set any properties with this.set('myProperty', 'value');
-  // Handle any actions with this.on('myAction', function(val) { ... });
-
-  this.render(hbs`{{authorized-users-only}}`);
+  this.render(hbs`
+    {{#authorized-users-only}}
+      template block text
+    {{/authorized-users-only}}
+  `);
 
   assert.equal(this.$().text().trim(), '');
 
+  this.set('session', {
+    isAuthenticated: true
+  });
+
   // Template block usage:
   this.render(hbs`
-    {{#authorized-users-only}}
+    {{#authorized-users-only session=session}}
       template block text
     {{/authorized-users-only}}
   `);

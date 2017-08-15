@@ -10,7 +10,6 @@ const {
 } = DS;
 
 const {
-  get,
   computed,
   generateGuid
 } = Ember;

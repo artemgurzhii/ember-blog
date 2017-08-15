@@ -5,7 +5,10 @@ const EmberApp = require('ember-cli/lib/broccoli/ember-app');
 
 module.exports = function(defaults) {
   let app = new EmberApp(defaults, {
-    // Sass options
+    babel: {
+      includePolyfill: true
+    },
+
     sassOptions: {
       extension: 'sass'
     },

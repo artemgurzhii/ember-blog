@@ -6,17 +6,32 @@ moduleForComponent('authors-only', 'Integration | Component | authors only', {
 });
 
 test('it renders', function(assert) {
-
-  // Set any properties with this.set('myProperty', 'value');
-  // Handle any actions with this.on('myAction', function(val) { ... });
-
-  this.render(hbs`{{authors-only}}`);
+  // Should not yield as user does not exist
+  this.render(hbs`
+    {{#authors-only session=session model=model}}
+      template block text
+    {{/authors-only}}
+  `);
 
   assert.equal(this.$().text().trim(), '');
 
+  this.setProperties({
+    session: {
+      currentUser: {
+        displayName: 'hello'
+      },
+      isAuthenticated: true
+    },
+    model: {
+      user: {
+        username: 'hello'
+      }
+    }
+  });
+
   // Template block usage:
   this.render(hbs`
-    {{#authors-only}}
+    {{#authors-only session=session model=model}}
       template block text
     {{/authors-only}}
   `);

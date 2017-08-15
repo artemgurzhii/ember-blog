@@ -1,8 +1,11 @@
 module.exports = {
   root: true,
   parserOptions: {
-    ecmaVersion: 6,
+    ecmaVersion: 8,
     sourceType: 'module'
+  },
+  globals: {
+    'Ember': true
   },
   extends: [
     'eslint:recommended',
