@@ -32,12 +32,13 @@ export default Component.extend({
       //   });
 
       const res = [];
+      const filerValueChars = this._clean(filerValue);
 
       filterAction(filerValue)
         .then(filteredResults => {
           filteredResults.forEach(result => {
-            const titleChars = this._clean(get(result, 'title'));
-            const filerValueChars = this._clean(filerValue);
+            const title = get(result, 'title');
+            const titleChars = this._clean(title);
 
             const isMatching = filerValueChars.every(char => titleChars.includes(char));
 

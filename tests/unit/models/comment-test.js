@@ -5,7 +5,7 @@ const {
 } = Ember;
 
 moduleForModel('comment', 'Unit | Model | comment', {
-  needs: ['model:user', 'model:post']
+  needs: ['model:user', 'model:post', 'validator:presence', 'validator:length', 'validator:belongs-to']
 });
 
 test('it exists', function(assert) {

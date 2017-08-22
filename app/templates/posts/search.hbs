@@ -1,6 +1,6 @@
 {{#filter-list
    placeholder="Filter By Title"
-   filter=(action (route-action "filterByTitle"))
+   filter=(action (route-action 'filterByTitle'))
    as |posts|}}
   {{#each posts as |post|}}
     {{blog-post-preview post=post}}

@@ -9,10 +9,10 @@ export default Route.extend({
   actions: {
     filterByTitle(title) {
       if (isPresent(title)) {
-        return this.store.findAll('post');
-      } else {
-        return this.store.findAll('post');
+        return this.store.query('post', { title });
       }
+
+      return this.store.findAll('post');
     }
   }
 });

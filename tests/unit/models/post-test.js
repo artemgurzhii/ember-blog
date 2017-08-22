@@ -5,7 +5,7 @@ const {
 } = Ember;
 
 moduleForModel('post', 'Unit | Model | post', {
-  needs: []
+  needs: ['validator:presence', 'validator:length', 'validator:belongs-to', 'validator:has-many']
 });
 
 test('it exists', function(assert) {
@@ -17,5 +17,5 @@ test('it exists', function(assert) {
   const url = new URL(image);
 
   assert.equal(Ember.typeOf(createdAt), 'date');
-  assert.equal(url.search.match(/\?image=\d{1,4}/), true);
+  assert.equal(!!url.search.match(/\?image=\d{1,4}/), true);
 });

@@ -1,6 +1,10 @@
 import { moduleForComponent, test } from 'ember-qunit';
 import hbs from 'htmlbars-inline-precompile';
 
+const {
+  set
+} = Ember;
+
 moduleForComponent('capitalize', 'helper:capitalize', {
   integration: true
 });
@@ -8,9 +12,8 @@ moduleForComponent('capitalize', 'helper:capitalize', {
 const given = 'hello world';
 const expected = 'Hello world';
 
-// Replace this with your real tests.
-test('it renders', function(assert) {
-  this.set('inputValue', given);
+test('capitalize string', function(assert) {
+  set(this, 'inputValue', given);
 
   this.render(hbs`{{capitalize inputValue}}`);
 

@@ -3,7 +3,7 @@ import { module, test } from 'qunit';
 
 module('Unit | Utility | states');
 
-test('it works', function(assert) {
-  let result = states();
-  assert.ok(result);
+test('has some basic states', function(assert) {
+  assert.ok(states.FAIL);
+  assert.ok(states.SUCCESS);
 });
