@@ -16,7 +16,6 @@ const {
 
 const {
   or,
-  gt,
   notEmpty
 } = computed;
 
@@ -62,9 +61,9 @@ export default Model.extend(PostValidations, {
     async: true
   }),
 
-  isPresentTitle: notEmpty('title'),
-  isPresentBody: notEmpty('body'),
-  isPresent: or('isPresentTitle', 'isPresentBody'),
+  isPresentTitle: notEmpty('title').readOnly(),
+  isPresentBody: notEmpty('body').readOnly(),
+  isPresent: or('isPresentTitle', 'isPresentBody').readOnly(),
 
-  wasEdited: gt('updated_at', 'created_at')
+  wasEdited: notEmpty('updated_at').readOnly()
 });
