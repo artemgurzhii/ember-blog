@@ -6,20 +6,7 @@ moduleForComponent('all-posts', 'Integration | Component | all posts', {
 });
 
 test('it renders', function(assert) {
-
-  // Set any properties with this.set('myProperty', 'value');
-  // Handle any actions with this.on('myAction', function(val) { ... });
-
   this.render(hbs`{{all-posts}}`);
 
-  assert.equal(this.$().text().trim(), '');
-
-  // Template block usage:
-  this.render(hbs`
-    {{#all-posts}}
-      template block text
-    {{/all-posts}}
-  `);
-
-  assert.equal(this.$().text().trim(), 'template block text');
+  assert.equal(this.$().text().trim(), `No Posts were found\n  Create your first post!!! - Create Post`);
 });

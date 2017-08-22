@@ -6,20 +6,7 @@ moduleForComponent('comment-form', 'Integration | Component | comment form', {
 });
 
 test('it renders', function(assert) {
-
-  // Set any properties with this.set('myProperty', 'value');
-  // Handle any actions with this.on('myAction', function(val) { ... });
-
   this.render(hbs`{{comment-form}}`);
 
-  assert.equal(this.$().text().trim(), '');
-
-  // Template block usage:
-  this.render(hbs`
-    {{#comment-form}}
-      template block text
-    {{/comment-form}}
-  `);
-
-  assert.equal(this.$().text().trim(), 'template block text');
+  assert.equal(this.$().text().trim(), 'Create Comment');
 });

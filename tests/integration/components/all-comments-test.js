@@ -5,21 +5,8 @@ moduleForComponent('all-comments', 'Integration | Component | all comments', {
   integration: true
 });
 
-test('it renders', function(assert) {
-
-  // Set any properties with this.set('myProperty', 'value');
-  // Handle any actions with this.on('myAction', function(val) { ... });
-
+test('no comments were passed', function(assert) {
   this.render(hbs`{{all-comments}}`);
 
-  assert.equal(this.$().text().trim(), '');
-
-  // Template block usage:
-  this.render(hbs`
-    {{#all-comments}}
-      template block text
-    {{/all-comments}}
-  `);
-
-  assert.equal(this.$().text().trim(), 'template block text');
+  assert.equal(this.$().text().trim(), `No Comments were found\n  Create your first comment!!!`);
 });

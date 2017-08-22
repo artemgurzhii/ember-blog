@@ -3,9 +3,11 @@ import config from '../../config/environment';
 
 const resolver = Resolver.create();
 
+const { modulePrefix, podModulePrefix } = config;
+
 resolver.namespace = {
-  modulePrefix: config.modulePrefix,
-  podModulePrefix: config.podModulePrefix
+  modulePrefix,
+  podModulePrefix
 };
 
 export default resolver;

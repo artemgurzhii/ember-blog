@@ -14,7 +14,7 @@ export default Ember.Mixin.create({
       const model = get(this.controller, 'model');
 
       if (get(model, 'hasDirtyAttributes')) {
-        const confirmation = confirm("Your changes haven't saved yet. Would you like to leave this form?");
+        const confirmation = confirm('Your changes haven\'t saved yet. Would you like to leave this form?');
 
         if (confirmation) {
           model.rollbackAttributes();

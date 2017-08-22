@@ -6,20 +6,8 @@ moduleForComponent('post-form', 'Integration | Component | post form', {
 });
 
 test('it renders', function(assert) {
-
-  // Set any properties with this.set('myProperty', 'value');
-  // Handle any actions with this.on('myAction', function(val) { ... });
-
   this.render(hbs`{{post-form}}`);
 
-  assert.equal(this.$().text().trim(), '');
-
-  // Template block usage:
-  this.render(hbs`
-    {{#post-form}}
-      template block text
-    {{/post-form}}
-  `);
-
-  assert.equal(this.$().text().trim(), 'template block text');
+  assert.ok(this.$().text().trim().includes('Title*'));
+  assert.ok(this.$().text().trim().includes('Body*'));
 });

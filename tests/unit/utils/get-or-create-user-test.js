@@ -5,5 +5,6 @@ module('Unit | Utility | get or create user');
 
 test('it works', function(assert) {
   let result = getOrCreateUser();
+  alert(result);
   assert.ok(result);
 });

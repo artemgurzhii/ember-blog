@@ -6,5 +6,5 @@ moduleForAcceptance('Acceptance | only signed in users can create posts');
 test('visiting /posts/new', async function(assert) {
   await visit('/posts/new');
 
-  assert.equal(currentRouteName(), '/posts.index');
+  assert.equal(currentRouteName(), 'posts.index');
 });

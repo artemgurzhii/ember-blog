@@ -1,5 +1,8 @@
 <div class="container">
-  {{navigation-bar session=session}}
+  {{navigation-bar session=session
+                   logout=(action (route-action 'logout'))
+                   login=(action (route-action 'login'))
+                 }}
 
   {{outlet}}
 </div>

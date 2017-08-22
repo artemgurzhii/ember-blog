@@ -52,7 +52,7 @@ module.exports = {
     'no-nested-ternary': 'error',
 
     // specify whether double or single quotes should be used
-    quotes: ['error', 'single', { avoidEscape: true }],
+    quotes: ['error', 'single', { allowTemplateLiterals: true }],
 
     // require or disallow use of semicolons instead of ASI
     semi: ['error', 'always'],

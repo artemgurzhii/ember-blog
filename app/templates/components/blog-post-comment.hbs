@@ -1,14 +1,16 @@
-<div class="blog-post-comment-image">
-  <img src="{{comment.user.avatar}}"/>
-</div>
-
-<div class="blog-post-comment-info">
-  <div class="blog-post-comment-author">
-    <a href="http://twitter.com/{{comment.user.username}}">{{comment.user.username}}</a>
-    commented at {{format-date comment.created_at}}
+{{#if (and comment.id comment.user)}}
+  <div class="blog-post-comment-image">
+    <img src="{{comment.user.avatar}}"/>
   </div>
 
-  <div class="blog-post-comment-body">
-    {{comment.body}}
+  <div class="blog-post-comment-info">
+    <div class="blog-post-comment-author">
+      <a href="http://twitter.com/{{comment.user.username}}">{{comment.user.username}}</a>
+      commented at {{format-date comment.created_at}}
+    </div>
+
+    <div class="blog-post-comment-body">
+      {{comment.body}}
+    </div>
   </div>
-</div>
+{{/if}}

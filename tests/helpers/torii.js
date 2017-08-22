@@ -1,6 +1,10 @@
 import config from '../../config/environment';
 
 const {
+  get
+} = Ember;
+
+const {
   torii: {
     sessionServiceName
   }

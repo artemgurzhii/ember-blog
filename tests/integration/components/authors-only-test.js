@@ -1,6 +1,10 @@
 import { moduleForComponent, test } from 'ember-qunit';
 import hbs from 'htmlbars-inline-precompile';
 
+const {
+  setProperties
+} = Ember;
+
 moduleForComponent('authors-only', 'Integration | Component | authors only', {
   integration: true
 });
@@ -15,7 +19,7 @@ test('it renders', function(assert) {
 
   assert.equal(this.$().text().trim(), '');
 
-  this.setProperties({
+  setProperties(this, {
     session: {
       currentUser: {
         displayName: 'hello'

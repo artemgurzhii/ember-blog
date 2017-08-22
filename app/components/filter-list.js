@@ -54,8 +54,7 @@ export default Component.extend({
   _clean(str) {
     return str
             .toLowerCase()
-            .replace(/_-/, '')
-            .split('')
-            .sort();
+            .replace(/_- /, '')
+            .split('');
   }
 });
