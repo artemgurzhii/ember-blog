@@ -15,8 +15,7 @@
   "repository": "https://github.com/artemgurzhii/ember-blog",
   "scripts": {
     "build": "ember build -prod",
-    "deploy": "firebase deploy",
-    "publish": "np",
+    "deploy": "yarn build && firebase deploy",
     "start": "ember server",
     "test": "cross-env COVERAGE=true ember exam -s",
     "test:split": "ember exam -s --split=4 --parallel",

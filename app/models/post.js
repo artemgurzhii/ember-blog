@@ -32,6 +32,10 @@ export default Model.extend(PostValidations, {
       const guid = generateGuid();
       const number = guid.replace('ember', '');
 
+      while (guid > 700) {
+        guid -= Math.floor(Math.random() * 100);
+      }
+
       return `https://unsplash.it/200/200/?image=${number}`;
     }
   }),
