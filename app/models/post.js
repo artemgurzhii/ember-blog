@@ -29,7 +29,7 @@ export default Model.extend(PostValidations, {
      * @description Generate uniq ID, drop 'ember' part to use it as image number
      */
     defaultValue() {
-      const guid = generateGuid();
+      let guid = generateGuid();
       const number = guid.replace('ember', '');
 
       while (guid > 700) {
