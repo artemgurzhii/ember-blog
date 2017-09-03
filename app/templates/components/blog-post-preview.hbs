@@ -17,10 +17,10 @@
 
   <footer class="blog-post-about">
     by <b>
-      {{#link-to "users.show" post.user.id}}
-        {{post.user.username}}
-      {{/link-to}}
-    </b> at {{format-date post.created_at}}
+         {{#link-to "users.show" post.user.id}}
+           {{post.user.username}}
+         {{/link-to}}
+       </b> at {{format-date post.created_at}}
 
     {{#if post.wasEdited}}
       • Post was edited
