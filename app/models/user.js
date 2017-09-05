@@ -12,6 +12,6 @@ export default Model.extend({
     defaultValue: 'John Doe'
   }),
 
-  @hasMany post: null,
-  @hasMany comment: null
+  @hasMany posts: null,
+  @hasMany comments: null
 });

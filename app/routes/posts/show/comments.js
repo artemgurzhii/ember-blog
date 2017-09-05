@@ -19,6 +19,7 @@ export default Route.extend({
 
     if (isEqual(isValid, false)) {
       alert('Error, comment is not valid, please fix all errors and try again.');
+
       comment.destroyRecord();
 
       return FAIL;
@@ -30,15 +31,15 @@ export default Route.extend({
       get(this, 'session.currentUser.photoURL'),
       get(this, 'store')
     ).then(user => {
-      get(user, 'comment').addObject(comment);
-      get(post, 'comment').addObject(comment);
+      get(user, 'comments').addObject(comment);
+      get(post, 'comments').addObject(comment);
 
       this._saveRecord(comment)
         .then(this._saveRecord.bind(this, post))
         .then(this._saveRecord.bind(this, user))
         .then(this._success.bind(this))
-        .catch(error => this._error(error, user, post, comment));
-      });
+        .catch(error => this._errorCreatingComment(error, user, post, comment));
+      }).catch(this._errorCreatingUser.bind(this));
 
     return SUCCESS;
   },
@@ -51,11 +52,15 @@ export default Route.extend({
     alert('Comment was successfully saved.');
   },
 
-  _error(error, user, post, comment) {
+  _errorCreatingComment(error, user, post, comment) {
     Logger.warn('Error while creating comment', error);
 
     user.rollbackAttributes();
     post.rollbackAttributes();
     comment.rollbackAttributes();
+  },
+
+  _errorCreatingUser(error) {
+    Logger.warn('Error while creating user', error);
   }
 });

@@ -52,9 +52,9 @@ export default Model.extend(PostValidations, {
   }),
 
   // Relationships
-  @hasMany category: null,
-  @hasMany tag: null,
-  @hasMany comment: null,
+  @hasMany categories: null,
+  @hasMany tags: null,
+  @hasMany comments: null,
   @belongsTo user: null,
 
   // Computed
