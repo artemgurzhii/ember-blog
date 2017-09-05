@@ -1,4 +1,3 @@
-import Ember from 'ember';
 import PostValidations from '../mixins/validations/post';
 import Model from 'ember-data/model';
 import attr from 'ember-data/attr';
@@ -16,28 +15,15 @@ import {
   hasMany
 } from 'ember-decorators/data';
 
-const {
-  generateGuid
-} = Ember;
-
 export default Model.extend(PostValidations, {
   title: attr('string'),
   body: attr('string'),
 
   image: attr('string', {
-
-    /**
-     * @description Generate uniq ID, drop 'ember' part to use it as image number
-     */
     defaultValue() {
-      let guid = generateGuid();
-      const number = guid.replace('ember', '');
+      const guid = Math.floor((Math.random() * 700));
 
-      while (guid > 700) {
-        guid -= Math.floor(Math.random() * 100);
-      }
-
-      return `https://unsplash.it/200/200/?image=${number}`;
+      return `https://unsplash.it/200/200/?image=${guid}`;
     }
   }),
 
