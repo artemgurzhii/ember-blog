@@ -1,10 +1,8 @@
-import DS from 'ember-data';
-
-const {
-  attr,
-  Model,
+import Model from 'ember-data/model';
+import attr from 'ember-data/attr';
+import {
   hasMany
-} = DS;
+} from 'ember-decorators/data';
 
 export default Model.extend({
   uid: attr('string'),
@@ -14,10 +12,6 @@ export default Model.extend({
     defaultValue: 'John Doe'
   }),
 
-  posts: hasMany('post', {
-    async: true
-  }),
-  comments: hasMany('comment', {
-    async: true
-  })
+  @hasMany post: null,
+  @hasMany comment: null
 });

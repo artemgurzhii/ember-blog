@@ -1,5 +1,5 @@
 import Ember from 'ember';
-import Status from './states';
+import { FAIL } from './states';
 
 const {
   get,
@@ -24,7 +24,8 @@ export default function getOrCreateUser(uid, username, avatar, store) {
 
   if (args.length !== 4 || args.any(isNone)) {
     Logger.warn('Wrong arguments passed: Expected - uid, username, avatar, store');
-    return Status.FAIL;
+
+    return FAIL;
   }
 
   return new RSVP.Promise(resolve => {

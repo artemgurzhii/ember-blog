@@ -1,4 +1,5 @@
 import Ember from 'ember';
+import { action } from 'ember-decorators/object';
 
 const {
   get
@@ -6,21 +7,20 @@ const {
 
 export default Ember.Mixin.create({
 
+  @action
   /**
    * @description Make sure that users will not lost their data.
    */
-  actions: {
-    willTransition(transition) {
-      const model = get(this.controller, 'model');
+  willTransition(transition) {
+    const model = get(this.controller, 'model');
 
-      if (get(model, 'hasDirtyAttributes')) {
-        const confirmation = confirm('Your changes haven\'t saved yet. Would you like to leave this form?');
+    if (get(model, 'hasDirtyAttributes')) {
+      const confirmation = confirm('Your changes haven\'t saved yet. Would you like to leave this form?');
 
-        if (confirmation) {
-          model.rollbackAttributes();
-        } else {
-          transition.abort();
-        }
+      if (confirmation) {
+        model.rollbackAttributes();
+      } else {
+        transition.abort();
       }
     }
   }

@@ -1,9 +1,23 @@
 import Ember from 'ember';
 
+import {
+  readOnly as readOnlyDecorator
+} from 'ember-decorators/object';
+
+import {
+  not,
+  notEmpty,
+  and,
+  or
+} from 'ember-decorators/object/computed';
+
 const {
   get,
   set,
-  computed,
+  computed: {
+    alias,
+    readOnly
+  },
   Component,
   defineProperty
 } = Ember;
@@ -18,22 +32,36 @@ export default Component.extend({
   validation: null,
   showValidations: false,
 
-  notValidating: computed.not('validation.isValidating').readOnly(),
-  hasContent: computed.notEmpty('value').readOnly(),
-  hasWarnings: computed.notEmpty('validation.warnings').readOnly(),
-  isValid: computed.and('hasContent', 'validation.isTruelyValid').readOnly(),
-  shouldDisplayValidations: computed.or('showValidations', 'hasContent').readOnly(),
+  @readOnlyDecorator
+  @not('validation.isValidating') notValidating: null,
 
-  showErrorClass: computed.and('notValidating', 'showErrorMessage', 'hasContent', 'validation').readOnly(),
-  showErrorMessage: computed.and('shouldDisplayValidations', 'validation.isInvalid').readOnly(),
-  showWarningMessage: computed.and('shouldDisplayValidations', 'hasWarnings', 'isValid').readOnly(),
+  @readOnlyDecorator
+  @notEmpty('value') hasContent: null,
+
+  @readOnlyDecorator
+  @notEmpty('validation.warnings') hasWarnings: null,
+
+  @readOnlyDecorator
+  @and('hasContent', 'validation.isTruelyValid') isValid: null,
+
+  @readOnlyDecorator
+  @or('showValidations', 'hasContent') shouldDisplayValidations: null,
+
+  @readOnlyDecorator
+  @and('notValidating', 'showErrorMessage', 'hasContent', 'validation') showErrorClass: null,
+
+  @readOnlyDecorator
+  @and('shouldDisplayValidations', 'validation.isInvalid') showErrorMessage: null,
+
+  @readOnlyDecorator
+  @and('shouldDisplayValidations', 'hasWarnings', 'isValid') showWarningMessage: null,
 
   init() {
     this._super(...arguments);
     const valuePath = get(this, 'valuePath');
 
-    defineProperty(this, 'validation', computed.readOnly(`model.validations.attrs.${valuePath}`));
-    defineProperty(this, 'value', computed.alias(`model.${valuePath}`));
+    defineProperty(this, 'validation', readOnly(`model.validations.attrs.${valuePath}`));
+    defineProperty(this, 'value', alias(`model.${valuePath}`));
   },
 
   focusOut() {

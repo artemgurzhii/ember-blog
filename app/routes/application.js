@@ -1,4 +1,6 @@
 import Ember from 'ember';
+import { service } from 'ember-decorators/service';
+import { action } from 'ember-decorators/object';
 
 const {
   get,
@@ -8,7 +10,7 @@ const {
 } = Ember;
 
 export default Route.extend({
-  session: Ember.inject.service(),
+  @service session: null,
 
   beforeModel() {
     return get(this, 'session')
@@ -16,19 +18,19 @@ export default Route.extend({
             .catch(function() {});
   },
 
-  actions: {
-    login() {
-      get(this, 'session')
-        .open('firebase', {
-          provider: 'twitter'
-        })
-        .then(this._success.bind(this))
-        .catch(this._error.bind(this));
-    },
+  @action
+  login() {
+    get(this, 'session')
+      .open('firebase', {
+        provider: 'twitter'
+      })
+      .then(this._success.bind(this))
+      .catch(this._error.bind(this));
+  },
 
-    logout() {
-      get(this, 'session').close();
-    }
+  @action
+  logout() {
+    get(this, 'session').close();
   },
 
   _success(message) {
@@ -41,6 +43,7 @@ export default Route.extend({
 
   title(tokens) {
     const base = 'Ember Blog';
+
     if (isEmpty(tokens)) {
       return base;
     }

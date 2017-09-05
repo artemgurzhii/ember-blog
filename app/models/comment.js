@@ -1,11 +1,9 @@
-import DS from 'ember-data';
+import Model from 'ember-data/model';
+import attr from 'ember-data/attr';
 import CommentValidations from '../mixins/validations/comment';
-
-const {
-  attr,
-  Model,
+import {
   belongsTo
-} = DS;
+} from 'ember-decorators/data';
 
 export default Model.extend(CommentValidations, {
   body: attr('string'),
@@ -16,10 +14,6 @@ export default Model.extend(CommentValidations, {
     }
   }),
 
-  user: belongsTo('user', {
-    async: true
-  }),
-  post: belongsTo('post', {
-    async: true
-  })
+  @belongsTo user: null,
+  @belongsTo post: null,
 });

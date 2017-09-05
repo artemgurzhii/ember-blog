@@ -1,6 +1,7 @@
 import Ember from 'ember';
+import { action } from 'ember-decorators/object';
 import getOrCreateUser from '../../../utils/get-or-create-user';
-import STATE from '../../../utils/states';
+import { FAIL, SUCCESS } from '../../../utils/states';
 
 const {
   get,
@@ -10,39 +11,36 @@ const {
 } = Ember;
 
 export default Route.extend({
-  actions: {
+  @action
+  save(body, post) {
+    const comment = this.store.createRecord('comment', { body });
 
-    // NOTE: Action returns state, on which depends whether comment text field should be cleared.
-    save(body, post) {
-      const comment = this.store.createRecord('comment', { body });
+    const isValid = get(comment, 'validations.isValid');
 
-      const isValid = get(comment, 'validations.isValid');
+    if (isEqual(isValid, false)) {
+      alert('Error, comment is not valid, please fix all errors and try again.');
+      comment.destroyRecord();
 
-      if (isEqual(isValid, false)) {
-        alert('Error, comment is not valid, please fix all errors and try again.');
-        comment.destroyRecord();
-
-        return STATE.FAIL;
-      }
-
-      getOrCreateUser(
-        get(this, 'session.uid'),
-        get(this, 'session.currentUser.displayName'),
-        get(this, 'session.currentUser.photoURL'),
-        get(this, 'store')
-      ).then(user => {
-        get(user, 'comments').addObject(comment);
-        get(post, 'comments').addObject(comment);
-
-        this._saveRecord(comment)
-          .then(this._saveRecord.bind(this, post))
-          .then(this._saveRecord.bind(this, user))
-          .then(this._success.bind(this))
-          .catch(error => this._error(error, user, post, comment));
-        });
-
-      return STATE.SUCCESS;
+      return FAIL;
     }
+
+    getOrCreateUser(
+      get(this, 'session.uid'),
+      get(this, 'session.currentUser.displayName'),
+      get(this, 'session.currentUser.photoURL'),
+      get(this, 'store')
+    ).then(user => {
+      get(user, 'comment').addObject(comment);
+      get(post, 'comment').addObject(comment);
+
+      this._saveRecord(comment)
+        .then(this._saveRecord.bind(this, post))
+        .then(this._saveRecord.bind(this, user))
+        .then(this._success.bind(this))
+        .catch(error => this._error(error, user, post, comment));
+      });
+
+    return SUCCESS;
   },
 
   _saveRecord(model) {

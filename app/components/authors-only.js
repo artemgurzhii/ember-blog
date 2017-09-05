@@ -1,24 +1,21 @@
 import Ember from 'ember';
+import { computed } from 'ember-decorators/object';
 
 const {
-  get,
   isNone,
   isEqual,
-  computed,
   Component
 } = Ember;
 
 export default Component.extend({
   tagName: '',
 
-  isAllowed: computed('model.user.username', 'session.currentUser.displayName', function () {
-    const authorName = get(this, 'model.user.username');
-    const sessionName = get(this, 'session.currentUser.displayName');
-
+  @computed('model.user.username', 'session.currentUser.displayName')
+  isAllowed(authorName, sessionName) {
     if (isNone(authorName) || isNone(sessionName)) {
       return false;
     }
 
     return isEqual(authorName, sessionName);
-  })
+  }
 });

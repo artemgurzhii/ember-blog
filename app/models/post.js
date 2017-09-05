@@ -1,23 +1,24 @@
-import DS from 'ember-data';
 import Ember from 'ember';
 import PostValidations from '../mixins/validations/post';
-
-const {
-  attr,
-  Model,
-  hasMany,
-  belongsTo
-} = DS;
-
-const {
-  computed,
-  generateGuid
-} = Ember;
-
-const {
+import Model from 'ember-data/model';
+import attr from 'ember-data/attr';
+import {
   or,
   notEmpty
-} = computed;
+} from 'ember-decorators/object/computed';
+
+import {
+  readOnly
+} from 'ember-decorators/object';
+
+import {
+  belongsTo,
+  hasMany
+} from 'ember-decorators/data';
+
+const {
+  generateGuid
+} = Ember;
 
 export default Model.extend(PostValidations, {
   title: attr('string'),
@@ -45,29 +46,27 @@ export default Model.extend(PostValidations, {
       return new Date();
     }
   }),
+
   updated_at: attr('date', {
     defaultValue: null
   }),
 
-  category: hasMany('category', {
-    async: true
-  }),
+  // Relationships
+  @hasMany category: null,
+  @hasMany tag: null,
+  @hasMany comment: null,
+  @belongsTo user: null,
 
-  tag: hasMany('tag', {
-    async: true
-  }),
+  // Computed
+  @readOnly
+  @notEmpty('updated_at') wasEdited: null,
 
-  comments: hasMany('comment', {
-    async: true
-  }),
+  @readOnly
+  @notEmpty('title') isTitlePresent: null,
 
-  user: belongsTo('user', {
-    async: true
-  }),
+  @readOnly
+  @notEmpty('body') isBodyPresent: null,
 
-  isPresentTitle: notEmpty('title').readOnly(),
-  isPresentBody: notEmpty('body').readOnly(),
-  isPresent: or('isPresentTitle', 'isPresentBody').readOnly(),
-
-  wasEdited: notEmpty('updated_at').readOnly()
+  @readOnly
+  @or('isTitlePresent', 'isBodyPresent') isPresent: null
 });

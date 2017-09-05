@@ -1,15 +1,11 @@
-import DS from 'ember-data';
-
-const {
-  attr,
-  Model,
+import Model from 'ember-data/model';
+import attr from 'ember-data/attr';
+import {
   belongsTo
-} = DS;
+} from 'ember-decorators/data';
 
 export default Model.extend({
   name: attr('string'),
 
-  post: belongsTo('post', {
-    async: true
-  })
+  @belongsTo post: null
 });

@@ -1,4 +1,5 @@
 import Ember from 'ember';
+import { service } from 'ember-decorators/service';
 
 const {
   get,
@@ -6,7 +7,7 @@ const {
 } = Ember;
 
 export default Ember.Mixin.create({
-  session: Ember.inject.service('session'),
+  @service session: null,
 
   beforeModel() {
     const isAuthenticated = get(this, 'session.isAuthenticated');

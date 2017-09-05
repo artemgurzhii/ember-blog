@@ -23,7 +23,7 @@ export default buildValidations({
     ]
   },
   user: validator('belongs-to'),
-  comments: validator('has-many')
+  comment: validator('has-many')
 }, {
   debounce: 200
 });

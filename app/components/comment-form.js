@@ -1,5 +1,5 @@
 import Ember from 'ember';
-import STATE from '../utils/states';
+import { SUCCESS } from '../utils/states';
 
 const {
   set,
@@ -15,7 +15,7 @@ export default Component.extend({
     save(body, post) {
       const result = get(this, 'save')(body, post);
 
-      if (isEqual(result, STATE.SUCCESS)) {
+      if (isEqual(result, SUCCESS)) {
         set(this, 'body', '');
       }
     }
